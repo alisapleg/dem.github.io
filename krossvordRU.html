@@ -1,149 +1,291 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Новогодний кроссворд</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Новогодний кроссворд — Решай онлайн!</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #0a3d15, #1d5b2a);
+      color: white;
       padding: 20px;
       text-align: center;
     }
     h1 {
-      color: #d32f2f;
-      text-shadow: 1px 1px 2px #aaa;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255,215,0,0.7);
+      margin-bottom: 20px;
     }
-    .crossword-container {
-      display: inline-block;
-      margin: 20px auto;
-      background: white;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .crossword {
+      background-color: #0f2a0f;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     }
-    .crossword-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(10, 40px);
-      grid-template-rows: repeat(10, 40px);
+      grid-template-columns: repeat(15, 30px);
+      grid-template-rows: repeat(15, 30px);
       gap: 1px;
       margin: 0 auto;
     }
     .cell {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
+      background: #1a471a;
+      border: 1px solid #4caf50;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: white;
-      border: 1px solid #333;
-      position: relative;
       font-weight: bold;
-      font-size: 18px;
+      position: relative;
+      color: white;
+      font-size: 16px;
     }
     .cell.black {
-      background-color: #333;
+      background: #000;
     }
-    .cell-number {
+    .cell input {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    .cell input:focus {
+      outline: 2px solid #ffd700;
+    }
+    .cell .number {
       position: absolute;
       top: 2px;
       left: 2px;
       font-size: 10px;
-      color: #000;
-      font-weight: bold;
+      color: #ffd700;
     }
     .clues {
-      margin-top: 25px;
+      background-color: #0f2a0f;
+      padding: 15px;
+      border-radius: 10px;
       text-align: left;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 350px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     }
     .clues h2 {
-      color: #1976d2;
+      color: #ffd700;
+      margin-top: 0;
     }
     .clue {
-      margin: 6px 0;
-      font-size: 16px;
+      margin: 8px 0;
+    }
+    .clue-number {
+      display: inline-block;
+      width: 20px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    button {
+      background: #ffd700;
+      color: #0a3d15;
+      border: none;
+      padding: 8px 16px;
+      margin: 0 8px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ffcc00;
+    }
+    .cell.incorrect {
+      background: #5a0000;
+    }
+    .cell.correct {
+      background: #1a471a;
     }
   </style>
 </head>
 <body>
-  <h1>Новогодний кроссворд</h1>
+  <h1>🎄 Новогодний кроссворд — Решай онлайн! 🎄</h1>
+  <div class="container">
+    <div class="crossword">
+      <div class="grid" id="crosswordGrid"></div>
+    </div>
+    <div class="clues">
+      <h2>По горизонтали:</h2>
+      <div class="clue"><span class="clue-number">1.</span> Главный новогодний персонаж с посохом и мешком</div>
+      <div class="clue"><span class="clue-number">4.</span> Весёлая детская "стрелялка", создающая хлопок</div>
+      <div class="clue"><span class="clue-number">6.</span> Торжественное событие, отмечаемое с ёлкой и подарками</div>
+      <div class="clue"><span class="clue-number">8.</span> Новогоднее дерево с игрушками</div>
+      <div class="clue"><span class="clue-number">9.</span> То, что падает зимой и из чего лепят снеговиков</div>
+      <div class="clue"><span class="clue-number">11.</span> Взрывные огненные шоу в небе в полночь</div>
+      <div class="clue"><span class="clue-number">13.</span> Волшебная помощница Деда Мороза</div>
 
-  <div class="crossword-container">
-    <div class="crossword-grid" id="grid">
-      <!-- Сетка будет заполнена JavaScript -->
+      <h2>По вертикали:</h2>
+      <div class="clue"><span class="clue-number">2.</span> Звон часов в полночь, возвещающий Новый год</div>
+      <div class="clue"><span class="clue-number">3.</span> Украшение для ёлки или комнаты из лампочек</div>
+      <div class="clue"><span class="clue-number">5.</span> То, что Дед Мороз кладёт под ёлку</div>
     </div>
   </div>
 
-  <div class="clues">
-    <h2>По горизонтали:</h2>
-    <div class="clue">1. Дерево, главный символ Нового года (4 буквы)</div>
-    <div class="clue">3. Зимний волшебник с белой бородой (5 букв)</div>
-    <div class="clue">5. Человечек из снега (8 букв)</div>
-    <div class="clue">6. Цитрусовый фрукт, традиционный на празднике (9 букв)</div>
-    <div class="clue">8. То, что дарят под ёлкой (7 букв)</div>
-    <div class="clue">9. Праздничный фейерверк (6 букв)</div>
-
-    <h2>По вертикали:</h2>
-    <div class="clue">2. Ледяные «сосиски» на крыше (8 букв)</div>
-    <div class="clue">4. Популярный салат на Новый год (7 букв)</div>
-    <div class="clue">7. Короткое, но громкое слово в полночь (3 буквы)</div>
-    <div class="clue">10. Игрушка, из которой вылетают конфетти (9 букв)</div>
+  <div class="controls">
+    <button onclick="checkAnswers()">Проверить</button>
+    <button onclick="showSolution()">Показать ответ</button>
+    <button onclick="resetPuzzle()">Сбросить</button>
   </div>
 
   <script>
-    // Сетка 10x10: '.' = пустая клетка (чёрная), '' = белая клетка (заполняется позже)
-    const gridLayout = [
-      ['1','2','3','4', '.', '.', '.', '.', '.', '.'], // ЁЛКА (горизонталь 1)
-      ['М','.', 'О','.', '.', '.', '.', '.', '.', '.'], // М (верт. Мороз)
-      ['О','.', 'Р','.', '5','6','7','8','9','0'], // О + СНЕГОВИК (гориз. 5)
-      ['Р','.', 'О','.', 'С','Н','Е','Г','О','В'], // Р + часть СНЕГОВИК
-      ['О','4','З','.', 'О','.', '.', '.', 'И','И'], // О + ОЛИВЬЕ (верт. 4) + часть СНЕГОВИК и МАНДАРИН
-      ['З','Л','И','В','Ь','Е','.', 'М','К','Н'], // МОРЗ (доп.), ОЛИВЬЕ, МАНДАРИН
-      ['.','И','.', '.','.', '.', '.', 'А','А','Д'], // ПОДАРОК (начинается в [6][7])
-      ['8','Д','А','Р','О','К','.', 'Н','Р','А'],
-      ['9','А','Л','Ю','Т','.', '1','0','И','Р'],
-      ['.','.','.','.','.','.', 'Х','Л','О','П']
+    const size = 15;
+
+    // Правильные слова и их расположение
+    const words = [
+      // Горизонтальные
+      { word: "ДЕДМОРОЗ",     x: 0,  y: 0,  dir: "h" },
+      { word: "ХЛОПУШКИ",     x: 3,  y: 3,  dir: "h" },
+      { word: "ПРАЗДНИК",     x: 1,  y: 5,  dir: "h" },
+      { word: "ЕЛКА",         x: 6,  y: 7,  dir: "h" },
+      { word: "СНЕГ",         x: 2,  y: 9,  dir: "h" },
+      { word: "САЛЮТ",        x: 5,  y: 11, dir: "h" },
+      { word: "СНЕГУРОЧКА",   x: 0,  y: 13, dir: "h" },
+      // Вертикальные
+      { word: "БОЙКУРАНТОВ",  x: 10, y: 0,  dir: "v" },
+      { word: "ГИРЛЯНДА",     x: 12, y: 0,  dir: "v" },
+      { word: "ПОДАРКИ",      x: 14, y: 0,  dir: "v" }
     ];
 
-    // Номера подсказок в начальных клетках
-    const numbers = {
-      '0,0': '1',   // Ёлка
-      '0,1': '2',   // Сосулька (верт.)
-      '0,2': '3',   // Мороз
-      '4,1': '4',   // Оливье (верт.)
-      '2,4': '5',   // Снеговик
-      '2,5': '6',   // Мандарин
-      '6,1': '7',   // Бой (верт.)
-      '7,0': '8',   // Подарок
-      '8,0': '9',   // Салют
-      '9,6': '10'   // Хлопушка
-    };
+    // Создаём сетку решений
+    let solutionGrid = Array(size).fill(null).map(() => Array(size).fill(null));
+    let numberGrid = Array(size).fill(null).map(() => Array(size).fill(null));
 
-    const grid = document.getElementById('grid');
+    // Заполняем решение
+    let currentNumber = 1;
+    words.forEach(wordObj => {
+      const { word, x, y, dir } = wordObj;
+      if (numberGrid[y][x] === null) {
+        numberGrid[y][x] = currentNumber++;
+      }
+      for (let i = 0; i < word.length; i++) {
+        const cx = x + (dir === 'h' ? i : 0);
+        const cy = y + (dir === 'v' ? i : 0);
+        if (cx < size && cy < size) {
+          solutionGrid[cy][cx] = word[i];
+        }
+      }
+    });
 
-    for (let row = 0; row < 10; row++) {
-      for (let col = 0; col < 10; col++) {
-        const cell = document.createElement('div');
-        const value = gridLayout[row][col];
-        if (value === '.') {
-          cell.classList.add('cell', 'black');
+    // Генерация сетки на странице
+    const gridEl = document.getElementById("crosswordGrid");
+    const inputCells = [];
+
+    for (let y = 0; y < size; y++) {
+      inputCells[y] = [];
+      for (let x = 0; x < size; x++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        if (solutionGrid[y][x] === null) {
+          cell.classList.add("black");
         } else {
-          cell.classList.add('cell');
-          cell.textContent = value;
-          const key = `${row},${col}`;
-          if (numbers[key]) {
-            const numSpan = document.createElement('span');
-            numSpan.className = 'cell-number';
-            numSpan.textContent = numbers[key];
+          const input = document.createElement("input");
+          input.maxLength = 1;
+          input.dataset.x = x;
+          input.dataset.y = y;
+          input.addEventListener("input", (e) => {
+            e.target.value = e.target.value.toUpperCase();
+          });
+          input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !e.target.value) {
+              // Опционально: переход назад при удалении — можно добавить
+            }
+          });
+          cell.appendChild(input);
+          inputCells[y][x] = input;
+
+          if (numberGrid[y][x] !== null) {
+            const numSpan = document.createElement("span");
+            numSpan.className = "number";
+            numSpan.textContent = numberGrid[y][x];
             cell.appendChild(numSpan);
           }
         }
-        grid.appendChild(cell);
+        gridEl.appendChild(cell);
       }
+    }
+
+    // Функция проверки
+    function checkAnswers() {
+      // Сбрасываем подсветку
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          if (solutionGrid[y][x]) {
+            const cellDiv = inputCells[y][x].closest('.cell');
+            cellDiv.classList.remove('incorrect', 'correct');
+          }
+        }
+      }
+
+      let allCorrect = true;
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          if (solutionGrid[y][x]) {
+            const userChar = (inputCells[y][x].value || '').trim();
+            const correctChar = solutionGrid[y][x];
+            const cellDiv = inputCells[y][x].closest('.cell');
+            if (userChar === correctChar) {
+              cellDiv.classList.add('correct');
+            } else {
+              cellDiv.classList.add('incorrect');
+              allCorrect = false;
+            }
+          }
+        }
+      }
+
+      if (allCorrect) {
+        alert("🎄 Поздравляем! Кроссворд решён правильно! 🎄");
+      }
+    }
+
+    // Показать решение
+    function showSolution() {
+      if (!confirm("Показать правильные ответы?")) return;
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          if (solutionGrid[y][x]) {
+            inputCells[y][x].value = solutionGrid[y][x];
+          }
+        }
+      }
+      checkAnswers(); // Подсветит всё как correct
+    }
+
+    // Сбросить
+    function resetPuzzle() {
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          if (inputCells[y][x]) {
+            inputCells[y][x].value = '';
+          }
+        }
+      }
+      // Убираем подсветку
+      document.querySelectorAll('.cell').forEach(cell => {
+        cell.classList.remove('incorrect', 'correct');
+      });
     }
   </script>
 </body>
