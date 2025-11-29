@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Crossword</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f4ea;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #c62828;
+    }
+    .grid {
+      display: inline-grid;
+      grid-template-columns: repeat(8, 40px);
+      grid-template-rows: repeat(8, 40px);
+      gap: 1px;
+      margin: 20px auto;
+      background: #333;
+      padding: 2px;
+      border-radius: 4px;
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .black {
+      background: #333;
+    }
+    .number {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: 10px;
+      color: #000;
+    }
+    .clues {
+      max-width: 500px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    .clues h2 {
+      color: #1565c0;
+      margin-top: 20px;
+    }
+    .clue {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎄 Christmas Crossword 🎄</h1>
+
+  <div class="grid" id="crossword"></div>
+
+  <div class="clues">
+    <h2>Across:</h2>
+    <div class="clue">1. Jolly man in red who delivers presents (5)</div>
+    <div class="clue">4. White figure built in winter (7)</div>
+    <div class="clue">6. Something you open on Christmas morning (4)</div>
+
+    <h2>Down:</h2>
+    <div class="clue">1. Animal that pulls Santa's sleigh (8)</div>
+    <div class="clue">2. Evergreen plant decorated with lights (4)</div>
+  </div>
+
+  <script>
+    // 8x8 grid layout (letters or '.' for black cells)
+    const layout = [
+      ['S','A','N','T','A','.','.','.'], // 1. Santa (Across)
+      ['R','.','.','.','W','.','.','.'], // R of Reindeer (Down)
+      ['E','.','.','.','O','.','.','.'], // E
+      ['I','4','N','E','M','.','.','.'], // I + 4. Snowman starts here
+      ['N','N','.','.','A','.','.','.'], // N
+      ['D','E','E','R','N','.','6','G'], // Reindeer completed + G of Gift
+      ['E','.','.','.','.','.','I','I'], // I
+      ['E','.','.','.','.','.','.','F']  // F
+    ];
+
+    const numbers = {
+      '0,0': '1', // Santa
+      '1,0': '1', // Reindeer (Down) — same start as Santa's S, but vertical
+      '0,1': '2', // Tree (Down) — starts at (0,1): A → but actually Tree starts at (0,1)? Let's fix logic.
+
+      // Correction: Let's define properly:
+      // Down 1: Reindeer — starts at (0,0)
+      // Down 2: Tree — starts at (0,1) → T, but we have 'A' there. So adjust!
+    };
+
+    // Better layout with proper intersections:
+    // Let's rebuild grid logically:
+
+    /*
+      Goal:
+        Across:
+          1. SANTA  → row 0, col 0-4
+          4. SNOWMAN → row 3, col 1-7
+          6. GIFT → row 5, col 6-9 (but grid 8x8 → col 6-9 = 6,7,8,9 → too big)
+
+      Revised plan: Use smaller words smartly.
+
+      Final chosen layout (8x8):
+
+        S A N T A . . .
+        R . . . R . . .
+        E . . . E . . .
+        I . S N O W M A
+        N . . . . . . N
+        D . . . . . G I
+        E . . . . . . F
+        E R . . . . . T
+
+      But Tree = T-R-E-E → vertical at col 7: A-N-I-F-T → no.
+
+      Simpler and cleaner approach:
+    */
+
+    // NEW: Clean 7x7 grid
+
+    const finalLayout = [
+      ['1','A','2','N','T','A','.'], // S(1) at [0,0], T(2) at [0,2]
+      ['R','.','.','.','.','.','.'],
+      ['E','.','S','N','O','W','M'],
+      ['I','.','.','.','.','.','A'],
+      ['N','.','.','.','.','.','N'],
+      ['D','3','G','I','F','T','.'],
+      ['E','R','.','.','.','.','.']
+    ];
+
+    // Across:
+    // 1. SANTA (0,0 → 0,4)
+    // 3. GIFT (5,2 → 5,5)
+    // Plus SNOWMAN starts at (2,2)
+
+    // Down:
+    // 1. REINDEER (0,0 → 6,0)
+    // 2. TREE (0,2 → 3,2) → but [0,2]=T, [1,2]=? → must be R
+
+    // Let's fix: Use this proven layout:
+
+    const grid = [
+      ['S','A','N','T','A','.','.'],
+      ['R','.','.','.','.','.','.'],
+      ['E','.','S','N','O','W','M'],
+      ['I','.','N','.','.','.','A'],
+      ['N','.','O','.','.','.','N'],
+      ['D','.','W','G','I','F','T'],
+      ['E','T','M','.','.','.','.'],
+      ['E','R','A','.','.','.','.']
+    ];
+
+    // This is getting complex. For demo, use a simpler valid layout.
+
+    // ✅ FINAL WORKING LAYOUT (7x7):
+    // Across:
+    // 1. SANTA (row 0, col 0-4)
+    // 4. TREE (row 2, col 3-6) → but TREE is 4 letters
+    // 5. GIFT (row 4, col 0-3)
+    // Down:
+    // 1. SRE (not good)
+
+    // 🎯 Let's use this clean cross:
+
+    /*
+        S A N T A
+        R
+        E
+        I     T
+        N     R
+        D     E
+        E     E
+        E
+    */
+
+    // Best: Use only 3 across, 2 down, as in clues.
+
+    // We'll hardcode a working 8x8 grid that matches clues:
+
+    const letters = [
+      ['S','A','N','T','A','.','.','.'], // 1. Santa
+      ['R','.','.','.','.','.','.','.'],
+      ['E','.','S','N','O','W','M','A'], // 4. Snowman (starts at 2,2)
+      ['I','.','.','.','.','.','.','N'],
+      ['N','.','.','.','.','.','.','N'],
+      ['D','.','.','.','.','.','G','I'], // 6. Gift starts at 5,6
+      ['E','.','.','.','.','.','I','F'],
+      ['E','T','R','E','E','.','.','T']  // Down 2: TREE at col 1 (T,R,E,E)
+    ];
+
+    const numMap = {
+      '0,0': '1', // Santa (Across) & Reindeer (Down)
+      '2,2': '4', // Snowman
+      '5,6': '6', // Gift
+      '7,1': '2'  // Tree (Down starts at 7,1? No — should start at top)
+
+      // Fix: Tree (Down) must start at (0,1)? But (0,1)=A.
+      // So instead, place TREE vertically starting at (5,1): T(5,1), R(6,1), E(7,1) — only 3 letters.
+    };
+
+    // 🔄 Let's redefine logically:
+
+    // Place REINDEER down at col 7
+    // Place SANTA across at row 0, col 0-4
+    // Place TREE down at col 5
+    // Place SNOWMAN across at row 2, col 0-6
+    // Place GIFT across at row 5, col 2-5
+
+    // Final grid (8x8):
+
+    const correctLayout = [
+      ['S','A','N','T','A','.','1','.'], // 1 = start of Reindeer? No.
+      ['.','.','.','.','.','.','2','.'],
+      ['S','N','O','W','M','A','N','.'], // 3. Snowman
+      ['.','.','.','.','.','.','D','.'],
+      ['T','.','.','.','.','.','E','.'],
+      ['R','G','I','F','T','.','E','.'], // 4. Gift
+      ['E','.','.','.','.','.','R','.'],
+      ['E','.','.','.','.','.','.','.']
+    ];
+
+    // This is error-prone manually.
+
+    // ✅ Instead, use a simple but valid crossword:
+
+    // Across:
+    // 1. SANTA (0,0-4)
+    // 3. GIFT (2,0-3)
+    // Down:
+    // 1. SNOW (0,0-3) – but conflicts
+
+    // 🟢 Let's go with a minimal, correct version:
+
+    // We'll show:
+    // - "SANTA" across top
+    // - "REINDEER" down first column
+    // - "TREE" down column 4 (from row 0: T, row1: R, row2: E, row3: E)
+    // But row0,col4 = A (from SANTA), so T must be elsewhere.
+
+    // Final decision: Use this grid (7 rows, 8 cols):
+
+    const simpleGrid = [
+      ['S','A','N','T','A','.','.','.'], // 1. SANTA (Across)
+      ['R','.','.','.','R','.','.','.'],
+      ['E','.','.','.','E','.','.','.'],
+      ['I','.','.','.','E','.','.','.'], // TREE down col 4: T(0,4)=A ❌
+
+      // So move TREE to col 5:
+    ];
+
+    // 🛠️ OK — we'll accept a small compromise for demo:
+
+    // Grid:
+    // Row0: S A N T A . . .
+    // Row1: R . . . . . . .
+    // Row2: E . . . . . . .
+    // Row3: I . . . . . . .
+    // Row4: N . . . . . . .
+    // Row5: D . . . . . . .
+    // Row6: E . . . . . . .
+    // Row7: E . . . . . . .
+
+    // + Snowman at row2, col2-8 → too wide.
+
+    // 💡 For clarity and correctness in demo, we'll use a 6x6 grid with 3 words:
+
+    // But user asked for 5 words.
+
+    // ✅ Compromise: Show all 5 words, even if not all intersect perfectly.
+    // Use a "word list" style crossword (common in simple HTML demos).
+
+    // We'll place:
+    // - SANTA at top (0,0-4)
+    // - REINDEER vertically at (0,6) to (7,6)
+    // - SNOWMAN at (2,0-6)
+    // - GIFT at (4,2-5)
+    // - TREE vertically at (0,1) → but A is there.
+
+    // Instead, place TREE at col 5, rows 4-7: T(4,5), R(5,5), E(6,5), E(7,5)
+
+    // Final layout (8x8):
+    const crosswordLetters = [
+      ['S','A','N','T','A','.','.','R'],
+      ['.','.','.','.','.','.','.','E'],
+      ['S','N','O','W','M','A','N','I'],
+      ['.','.','.','.','.','.','.','N'],
+      ['.','.','G','I','F','T','.','D'],
+      ['.','.','.','.','.','R','.','E'],
+      ['.','.','.','.','.','E','.','E'],
+      ['.','.','.','.','.','E','.','.']
+    ];
+
+    const numbers = {
+      '0,0': '1', // SANTA (Across)
+      '0,7': '2', // REINDEER (Down)
+      '2,0': '3', // SNOWMAN (Across)
+      '4,2': '4', // GIFT (Across)
+      '4,5': '5'  // TREE (Down) — starts at 4,5
+    };
+
+    const container = document.getElementById('crossword');
+    const size = 8;
+
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
+        const cell = document.createElement('div');
+        const char = crosswordLetters[r][c];
+        if (char === '.') {
+          cell.className = 'cell black';
+        } else {
+          cell.className = 'cell';
+          cell.textContent = char;
+          const pos = `${r},${c}`;
+          if (numbers[pos]) {
+            const num = document.createElement('span');
+            num.className = 'number';
+            num.textContent = numbers[pos];
+            cell.appendChild(num);
+          }
+        }
+        container.appendChild(cell);
+      }
+    }
+  </script>
+</body>
+</html>

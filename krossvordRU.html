@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новогодний кроссворд</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d32f2f;
+      text-shadow: 1px 1px 2px #aaa;
+    }
+    .crossword-container {
+      display: inline-block;
+      margin: 20px auto;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .crossword-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      grid-template-rows: repeat(10, 40px);
+      gap: 1px;
+      margin: 0 auto;
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border: 1px solid #333;
+      position: relative;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .cell.black {
+      background-color: #333;
+    }
+    .cell-number {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: 10px;
+      color: #000;
+      font-weight: bold;
+    }
+    .clues {
+      margin-top: 25px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .clues h2 {
+      color: #1976d2;
+    }
+    .clue {
+      margin: 6px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Новогодний кроссворд</h1>
+
+  <div class="crossword-container">
+    <div class="crossword-grid" id="grid">
+      <!-- Сетка будет заполнена JavaScript -->
+    </div>
+  </div>
+
+  <div class="clues">
+    <h2>По горизонтали:</h2>
+    <div class="clue">1. Дерево, главный символ Нового года (4 буквы)</div>
+    <div class="clue">3. Зимний волшебник с белой бородой (5 букв)</div>
+    <div class="clue">5. Человечек из снега (8 букв)</div>
+    <div class="clue">6. Цитрусовый фрукт, традиционный на празднике (9 букв)</div>
+    <div class="clue">8. То, что дарят под ёлкой (7 букв)</div>
+    <div class="clue">9. Праздничный фейерверк (6 букв)</div>
+
+    <h2>По вертикали:</h2>
+    <div class="clue">2. Ледяные «сосиски» на крыше (8 букв)</div>
+    <div class="clue">4. Популярный салат на Новый год (7 букв)</div>
+    <div class="clue">7. Короткое, но громкое слово в полночь (3 буквы)</div>
+    <div class="clue">10. Игрушка, из которой вылетают конфетти (9 букв)</div>
+  </div>
+
+  <script>
+    // Сетка 10x10: '.' = пустая клетка (чёрная), '' = белая клетка (заполняется позже)
+    const gridLayout = [
+      ['1','2','3','4', '.', '.', '.', '.', '.', '.'], // ЁЛКА (горизонталь 1)
+      ['М','.', 'О','.', '.', '.', '.', '.', '.', '.'], // М (верт. Мороз)
+      ['О','.', 'Р','.', '5','6','7','8','9','0'], // О + СНЕГОВИК (гориз. 5)
+      ['Р','.', 'О','.', 'С','Н','Е','Г','О','В'], // Р + часть СНЕГОВИК
+      ['О','4','З','.', 'О','.', '.', '.', 'И','И'], // О + ОЛИВЬЕ (верт. 4) + часть СНЕГОВИК и МАНДАРИН
+      ['З','Л','И','В','Ь','Е','.', 'М','К','Н'], // МОРЗ (доп.), ОЛИВЬЕ, МАНДАРИН
+      ['.','И','.', '.','.', '.', '.', 'А','А','Д'], // ПОДАРОК (начинается в [6][7])
+      ['8','Д','А','Р','О','К','.', 'Н','Р','А'],
+      ['9','А','Л','Ю','Т','.', '1','0','И','Р'],
+      ['.','.','.','.','.','.', 'Х','Л','О','П']
+    ];
+
+    // Номера подсказок в начальных клетках
+    const numbers = {
+      '0,0': '1',   // Ёлка
+      '0,1': '2',   // Сосулька (верт.)
+      '0,2': '3',   // Мороз
+      '4,1': '4',   // Оливье (верт.)
+      '2,4': '5',   // Снеговик
+      '2,5': '6',   // Мандарин
+      '6,1': '7',   // Бой (верт.)
+      '7,0': '8',   // Подарок
+      '8,0': '9',   // Салют
+      '9,6': '10'   // Хлопушка
+    };
+
+    const grid = document.getElementById('grid');
+
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        const cell = document.createElement('div');
+        const value = gridLayout[row][col];
+        if (value === '.') {
+          cell.classList.add('cell', 'black');
+        } else {
+          cell.classList.add('cell');
+          cell.textContent = value;
+          const key = `${row},${col}`;
+          if (numbers[key]) {
+            const numSpan = document.createElement('span');
+            numSpan.className = 'cell-number';
+            numSpan.textContent = numbers[key];
+            cell.appendChild(numSpan);
+          }
+        }
+        grid.appendChild(cell);
+      }
+    }
+  </script>
+</body>
+</html>
