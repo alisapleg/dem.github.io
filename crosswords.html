@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Новогодний кроссворд</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Year Crossword / Новогодний кроссворд</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
       background: linear-gradient(135deg, #e0f7fa, #f8bbd0);
       padding: 20px;
       color: #2d3436;
+      margin: 0;
     }
-    h2 {
+    .header {
       text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
       color: #c2185b;
+      margin-bottom: 10px;
+    }
+    .lang-switch {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    button {
+      padding: 8px 16px;
+      margin: 0 8px;
+      border: none;
+      border-radius: 20px;
+      background: #ffeaa7;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button.active {
+      background: #fab1a0;
+      color: white;
     }
     table.crossword {
       margin: 20px auto;
       border-collapse: collapse;
       background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     .crossword td {
       width: 40px;
@@ -37,55 +61,67 @@
       margin: 30px auto;
       padding: 0 15px;
     }
-    .questions h3 {
+    .questions h2 {
       color: #e17055;
       margin-top: 25px;
     }
     .questions ul {
       padding-left: 20px;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-<h2>🎄 Новогодний кроссворд</h2>
+<div class="header">
+  <h1 id="title-ru">🎄 Новогодний кроссворд</h1>
+  <h1 id="title-en" class="hidden">🎄 New Year Crossword</h1>
+</div>
 
-<!-- Сетка 10×10 -->
+<div class="lang-switch">
+  <button id="btn-ru" class="active" onclick="setLang('ru')">🇷🇺 Русский</button>
+  <button id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+</div>
+
+<!-- Сетка кроссворда (одинаковая для обоих языков) -->
 <table class="crossword">
   <tr>
-    <td>Д</td><td>Е</td><td>Д</td><td>М</td><td>О</td><td>Р</td><td>О</td><td>З</td><td></td><td></td>
+    <td>D</td><td>E</td><td>D</td><td>M</td><td>O</td><td>R</td><td>O</td><td>Z</td><td></td><td></td>
   </tr>
   <tr>
-    <td>О</td><td>Ё</td><td>Л</td><td>К</td><td>А</td><td></td><td></td><td></td><td></td><td></td>
+    <td>Y</td><td>Ё</td><td>L</td><td>K</td><td>A</td><td></td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <td>М</td><td></td><td>С</td><td>Н</td><td>Е</td><td>Г</td><td></td><td></td><td></td><td></td>
+    <td>M</td><td></td><td>S</td><td>N</td><td>E</td><td>G</td><td></td><td></td><td></td><td></td>
   </tr>
   <tr>
-    <td></td><td>Е</td><td></td><td></td><td>М</td><td>А</td><td>Н</td><td>Д</td><td>А</td><td>Р</td>
+    <td></td><td>E</td><td></td><td></td><td>M</td><td>A</td><td>N</td><td>D</td><td>A</td><td>R</td>
   </tr>
   <tr>
-    <td></td><td>Л</td><td></td><td></td><td>П</td><td>О</td><td>Д</td><td>А</td><td>Р</td><td>О</td>
+    <td></td><td>L</td><td></td><td></td><td>P</td><td>O</td><td>D</td><td>A</td><td>R</td><td>O</td>
   </tr>
   <tr>
-    <td>М</td><td>И</td><td>Ш</td><td>У</td><td>Р</td><td>А</td><td></td><td></td><td>К</td><td>К</td>
+    <td>M</td><td>I</td><td>S</td><td>H</td><td>U</td><td>R</td><td>A</td><td></td><td>K</td><td>K</td>
   </tr>
   <tr>
-    <td>Ё</td><td></td><td></td><td></td><td></td><td></td><td>Ш</td><td>А</td><td>А</td><td>А</td>
+    <td>Y</td><td></td><td></td><td></td><td></td><td></td><td>S</td><td>H</td><td>A</td><td>R</td>
   </tr>
   <tr>
-    <td>Д</td><td>О</td><td>М</td><td></td><td>О</td><td>Л</td><td>Е</td><td>Н</td><td>М</td><td>М</td>
+    <td>D</td><td>O</td><td>M</td><td></td><td>O</td><td>L</td><td>E</td><td>N</td><td>M</td><td>M</td>
   </tr>
   <tr>
-    <td></td><td>С</td><td>Н</td><td>Е</td><td>Г</td><td>О</td><td>В</td><td>И</td><td>Е</td><td>Е</td>
+    <td></td><td>S</td><td>N</td><td>E</td><td>G</td><td>O</td><td>V</td><td>I</td><td>K</td><td>K</td>
   </tr>
   <tr>
-    <td></td><td>С</td><td>Ч</td><td>А</td><td>С</td><td>Т</td><td>Ь</td><td>Е</td><td></td><td></td>
+    <td></td><td>S</td><td>C</td><td>H</td><td>A</td><td>S</td><td>T</td><td>Y</td><td>E</td><td></td>
   </tr>
 </table>
 
-<div class="questions">
-  <h3>По горизонтали:</h3>
+<!-- Вопросы на русском -->
+<div id="questions-ru" class="questions">
+  <h2>По горизонтали:</h2>
   <ul>
     <li>1. Добрый старик с посохом, дарящий подарки под ёлку.</li>
     <li>2. Праздничное вечнозелёное дерево с игрушками.</li>
@@ -99,20 +135,67 @@
     <li>10. Главное, чего желают друг другу в новогоднюю ночь.</li>
   </ul>
 
-  <h3>По вертикали:</h3>
+  <h2>По вертикали:</h2>
   <ul>
     <li>1. Место, где собирается семья за новогодним столом.</li>
     <li>2. Другое название новогодней ёлки.</li>
     <li>3. Блестящая гирлянда для ёлки.</li>
-    <li>4. Место, откуда приходят «тёплые» новогодние поздравления (например, в письме).</li>
+    <li>4. Место, откуда приходят «тёплые» новогодние поздравления.</li>
     <li>5. Зимний предмет одежды для рук.</li>
     <li>6. Звук колокольчика или боя курантов.</li>
-    <li>7. Сладость, которую любит Винни-Пух и часто кладут в подарки.</li>
-    <li>8. Место, где ты сейчас читаешь этот кроссворд 😉</li>
-    <li>9. Экзотическое растение, иногда украшающее дома (игра слов: похоже на "Камчатка", но здесь — **Камеля** для пересечения; примечание ниже ⬇️).</li>
+    <li>7. Сладость, которую любит Винни-Пух.</li>
+    <li>8. Место, где вы сейчас читаете этот кроссворд 😉</li>
+    <li>9. Условное слово для пересечения (похоже на «камелия»).</li>
     <li>10. Зимняя фигурка из снега с морковкой-носом.</li>
   </ul>
 </div>
+
+<!-- Вопросы на английском -->
+<div id="questions-en" class="questions hidden">
+  <h2>Across:</h2>
+  <ul>
+    <li>1. Kind old man with a staff who brings gifts under the tree.</li>
+    <li>2. Festive evergreen tree decorated with ornaments.</li>
+    <li>3. White winter cover that crunches underfoot.</li>
+    <li>4. Fragrant citrus fruit, a New Year symbol.</li>
+    <li>5. What every child waits for under the tree.</li>
+    <li>6. Round, shiny Christmas tree ornament.</li>
+    <li>7. Party tube that shoots out confetti with a loud pop.</li>
+    <li>8. Animal that pulls Santa’s sleigh.</li>
+    <li>9. Cold season when New Year arrives.</li>
+    <li>10. The main thing people wish each other on New Year’s Eve.</li>
+  </ul>
+
+  <h2>Down:</h2>
+  <ul>
+    <li>1. Place where the family gathers for the holiday dinner.</li>
+    <li>2. Another name for a Christmas tree.</li>
+    <li>3. Sparkly tinsel garland for the tree.</li>
+    <li>4. Distant place (e.g., in holiday letters).</li>
+    <li>5. Winter handwear to keep fingers warm.</li>
+    <li>6. Sound of bells or midnight chimes.</li>
+    <li>7. Sweet treat loved by Winnie the Pooh.</li>
+    <li>8. Where you’re reading this right now 😉</li>
+    <li>9. Placeholder word for crossword fit (from “camellia”).</li>
+    <li>10. Snow figure with a carrot nose.</li>
+  </ul>
+</div>
+
+<script>
+  function setLang(lang) {
+    // Обновляем заголовок
+    document.getElementById('title-ru').classList.toggle('hidden', lang !== 'ru');
+    document.getElementById('title-en').classList.toggle('hidden', lang !== 'en');
+
+    // Переключаем вопросы
+    document.getElementById('questions-ru').classList.toggle('hidden', lang !== 'ru');
+    document.getElementById('questions-en').classList.toggle('hidden', lang !== 'en');
+
+    // Обновляем кнопки
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  }
+</script>
 
 </body>
 </html>
