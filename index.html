@@ -6,14 +6,12 @@
     <title>Мой блог — С Новым 2026 годом!</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
 
-    <!-- Подключение шрифта Pudelinka -->
     <style>
         @font-face {
             font-family: 'Pudelinka';
             src: url('Pudelinka.ttf') format('truetype');
         }
 
-        /* Общие стили */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -25,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* Снежинки (анимация фона) */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -38,7 +35,7 @@
 
         .snowflake {
             position: absolute;
-            color: #fff;
+            /* color: #fff; ← закомментировано, цвет теперь задаётся в JS */
             font-size: 1.2em;
             opacity: 0.8;
             user-select: none;
@@ -51,7 +48,6 @@
             }
         }
 
-        /* Цитата */
         blockquote.q {
             font-style: italic;
             text-align: center;
@@ -60,7 +56,6 @@
             font-size: 1.1em;
         }
 
-        /* Тег посещения */
         .visit-tag {
             display: inline-block;
             background: linear-gradient(to right, #ff9a9e, #fad0c4);
@@ -74,7 +69,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
-        /* Новогодняя секция */
         .new-year-section {
             text-align: center;
             margin: 40px 0;
@@ -115,7 +109,6 @@
             margin: 0 auto 25px;
         }
 
-        /* Видео */
         .video-container {
             margin: 25px auto;
             max-width: 600px;
@@ -146,7 +139,6 @@
             display: block;
         }
 
-        /* Остальной контент */
         h2 {
             color: #2d3436;
             margin-top: 40px;
@@ -168,7 +160,6 @@
             text-decoration: underline;
         }
 
-        /* Иконка Flaticon */
         footer {
             margin-top: 60px;
             text-align: center;
@@ -185,10 +176,8 @@
 
 <blockquote class="q">Путешествие в тысячу миль начинается с одного шага (Лао Цзы)</blockquote>
 
-<!-- Тег посещения -->
-<div class="visit-tag">посещение-2 — 20.12.2025</div>
+<div class="visit-tag">куратор-2 — 20.12.2025</div>
 
-<!-- Запись от 1 января 2026 -->
 <h2>1 января, 2026</h2>
 <div class="new-year-section">
     <h2>С Новым годом 2026!</h2>
@@ -198,14 +187,12 @@
         Звезда ведёт путей вершины —<br>
         Новый год приходит к нам!
     </p>
-
     <div class="video-container">
         <img src="https://i.imgur.com/9WYx7Zb.jpg" alt="Нажмите, чтобы посмотреть видео" id="video-trigger">
         <span class="video-caption">👉 Нажмите на картинку, чтобы открыть праздничное видео</span>
     </div>
 </div>
 
-<!-- Остальные записи -->
 <h2>1 декабря, 2025</h2>
 <img src="Icons/newyear2026.png" alt="Новый год" style="max-width:100px; margin:10px 0;">
 <p>Поздравление с Наступающим 2026 годом читайте <a href="Congratulations2026.html">здесь</a>.</p>
@@ -221,18 +208,15 @@
     Оставляю в прошлом скучную неинтересную локальную файловую систему ради Всемирной паутины.
 </p>
 
-<!-- Снежинки -->
 <div class="snowflakes" id="snowflakes"></div>
 
 <footer>
     <a href="https://www.flaticon.com/ru/free-icons/2026" title="2026 иконки">2026 иконки от Freepik — Flaticon</a>
 </footer>
 
-<!-- Скрипт снежинок и видео -->
 <script>
-    // Генерация снежинок
     const snowflakesContainer = document.getElementById('snowflakes');
-    const snowflakeCount = 30;
+    const snowflakeCount = 60; // ← больше снежинок
     const snowflakes = ['❄', '❅', '❆'];
 
     for (let i = 0; i < snowflakeCount; i++) {
@@ -244,10 +228,10 @@
         snowflake.style.fontSize = (Math.random() * 16 + 12) + 'px';
         snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
         snowflake.style.animationDelay = Math.random() * 5 + 's';
+        snowflake.style.color = '#ccefff'; // ← нежно-голубой цвет
         snowflakesContainer.appendChild(snowflake);
     }
 
-    // Клик по изображению → открывает видео
     document.getElementById('video-trigger').addEventListener('click', function() {
         window.open('https://example.com/video.mp4', '_blank');
     });
