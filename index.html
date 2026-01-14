@@ -13,19 +13,36 @@
             src: url('Pudelinka.ttf') format('truetype');
         }
 
-        /* Общие стили */
+        /* ПРАЗДНИЧНЫЙ ФОН */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 40px;
-            background: linear-gradient(135deg, #e0f7fa, #f8bbd0);
-            color: #333;
+            /* ЯРКИЙ ГРАДИЕНТ: КРАСНЫЙ → ОРАНЖЕВЫЙ → ЗОЛОТО */
+            background: linear-gradient(135deg, #ff416c, #ff8b3d, #ffd700);
+            color: #2b2b2b;
             position: relative;
             overflow-x: hidden;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
         }
 
-        /* Снежинки (анимация фона) */
+        /* Мерцающий контейнер записей */
+        .post-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            animation: glow 4s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+            to { box-shadow: 0 8px 35px rgba(255,215,0,0.4), 0 0 20px rgba(255,100,0,0.2); }
+        }
+
+        /* Снежинки */
         .snowflakes {
             position: fixed;
             top: 0;
@@ -38,11 +55,12 @@
 
         .snowflake {
             position: absolute;
-            color: #fff;
-            font-size: 1.2em;
-            opacity: 0.8;
+            color: #ffffff;
+            font-size: 1.4em;
+            opacity: 0.9;
             user-select: none;
             animation: fall linear infinite;
+            text-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
         @keyframes fall {
@@ -51,7 +69,7 @@
             }
         }
 
-        /* Падающие сердечки */
+        /* Сердечки — ярче и с бликом */
         .hearts {
             position: fixed;
             top: 0;
@@ -65,10 +83,10 @@
         .heart {
             position: absolute;
             top: -20px;
-            color: #ff6b6b;
-            font-size: 1.4em;
+            font-size: 1.6em;
             opacity: 0;
             animation: fallHeart 8s infinite ease-in;
+            text-shadow: 0 0 10px rgba(255,105,180,0.7);
         }
 
         @keyframes fallHeart {
@@ -80,7 +98,7 @@
                 opacity: 1;
             }
             90% {
-                opacity: 0.8;
+                opacity: 0.9;
             }
             100% {
                 transform: translateY(100vh) rotate(360deg);
@@ -92,64 +110,60 @@
         blockquote.q {
             font-style: italic;
             text-align: center;
-            color: #555;
+            color: #fff;
             margin: 20px 0 40px;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 15px;
         }
 
         /* Тег куратора */
         .visit-tag {
             display: inline-block;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            color: #d63031;
+            background: linear-gradient(to right, #ff6b6b, #ffa500);
+            color: white;
             font-weight: bold;
-            padding: 8px 18px;
-            border-radius: 25px;
-            font-size: 1.25em;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 1.3em;
             margin: 16px 0;
             font-family: 'Pudelinka', cursive;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
 
         /* Новогодняя секция */
         .new-year-section {
             text-align: center;
             margin: 40px 0;
-            padding: 30px;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 25px rgba(255,215,0,0.4);
             position: relative;
             overflow: hidden;
-        }
-
-        .new-year-section::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%);
-            z-index: -1;
-            border-radius: 25px;
+            border: 3px solid #ffd700;
         }
 
         .new-year-section h2 {
             font-family: 'Pudelinka', cursive;
-            font-size: 2.5em;
-            color: #c2185b;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 2.8em;
+            color: #d32f2f;
+            text-shadow: 2px 2px 6px rgba(255,215,0,0.8);
             margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .new-year-section p {
             font-family: 'Pudelinka', cursive;
-            font-size: 1.5em;
+            font-size: 1.6em;
             line-height: 1.5;
-            color: #444;
+            color: #c2185b;
             max-width: 700px;
             margin: 0 auto 25px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
         }
 
         /* Видео */
@@ -163,58 +177,82 @@
 
         .video-container img {
             width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,215,0,0.3);
             transition: all 0.4s ease;
-            border: 4px solid #ffeaa7;
+            border: 5px solid #ffeb3b;
         }
 
         .video-container img:hover {
-            transform: scale(1.04);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border-color: #fab1a0;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(255,140,0,0.6);
+            border-color: #ff9800;
         }
 
         .video-caption {
             font-family: 'Pudelinka', cursive;
-            font-size: 1.2em;
-            color: #e17055;
-            margin-top: 12px;
+            font-size: 1.3em;
+            color: #e91e63;
+            margin-top: 14px;
             display: block;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
 
-        /* Остальной контент */
+        /* Заголовки записей */
         h2 {
-            color: #2d3436;
+            color: #b71c1c;
             margin-top: 40px;
             font-family: 'Pudelinka', cursive;
-            font-size: 1.8em;
+            font-size: 2em;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.6);
+            padding: 10px;
+            border-radius: 15px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         p, a {
-            font-size: 1.1em;
-            color: #444;
+            font-size: 1.15em;
+            color: #2b2b2b;
+            background-color: rgba(255,255,255,0.7);
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 8px 0;
         }
 
         a {
-            color: #0984e3;
+            color: #d32f2f;
             text-decoration: none;
+            font-weight: bold;
+            background: rgba(255,243,205,0.8);
+            border: 1px solid #ffc107;
         }
 
         a:hover {
             text-decoration: underline;
+            background: rgba(255,215,0,0.9);
+            color: #b71c1c;
         }
 
-        /* Иконка Flaticon */
+        /* Footer */
         footer {
-            margin-top: 60px;
+            margin-top: 70px;
             text-align: center;
-            font-size: 0.9em;
-            color: #777;
+            font-size: 0.95em;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 15px;
         }
 
         footer a {
-            color: #555;
+            color: #ffd700;
+            font-weight: bold;
         }
 
         /* Canvas для салюта */
@@ -231,80 +269,92 @@
 </head>
 <body>
 
-<!-- Ссылка на почту в самом начале -->
+<!-- Ссылка на почту -->
 <p style="text-align: center; margin-bottom: 20px;">
-    <a href="mailto:alya.palagina@bk.ru" style="font-size: 1.2em; color: #2d3436; font-weight: bold;">📧 Напишите мне</a>
+    <a href="mailto:alya.palagina@bk.ru"
+       style="font-size: 1.3em; color: #b71c1c; font-weight: bold; background: rgba(255,255,255,0.85); padding: 10px 20px; border-radius: 25px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        📧 Напишите мне
+    </a>
 </p>
 
 <blockquote class="q">Путешествие в тысячу миль начинается с одного шага (Лао Цзы)</blockquote>
 
-<!-- Тег куратора -->
 <div class="visit-tag">куратор-2 — 20.12.2025</div>
 
-<!-- Новая запись от текущей даты: 14 января 2026 -->
-<h2>14 января, 2026</h2>
-<p>
-    Сегодня я решила разобраться, из каких частей состоит доменное имя моего сайта и как устроена его иерархия. Поскольку мой блог размещён на GitHub Pages, его адрес выглядит так:
-    <code>https://&lt;имя-пользователя&gt;.github.io</code>.
-</p>
-<p>
-    Возьмём конкретный пример: если мой аккаунт на GitHub называется <strong>alyapalagina</strong>, то полное доменное имя сайта будет:
-    <strong>alyapalagina.github.io</strong>.
-</p>
-<p>
-    Эта структура состоит из трёх уровней доменной иерархии (читается справа налево):
-</p>
-<ul>
-    <li><strong>.io</strong> — домен верхнего уровня (TLD, Top-Level Domain). Изначально он принадлежал Британской территории в Индийском океане, но сейчас широко используется в IT-сфере.</li>
-    <li><strong>github</strong> — домен второго уровня (SLD, Second-Level Domain). Он принадлежит компании GitHub и используется для предоставления поддоменов пользователям.</li>
-    <li><strong>alyapalagina</strong> — поддомен третьего уровня, созданный автоматически при публикации репозитория через GitHub Pages.</li>
-</ul>
-<p>
-    Таким образом, DNS-система читает доменное имя от глобального к локальному: сначала определяется зона <code>.io</code>, внутри неё — серверы <code>github.io</code>, а уже внутри них — конкретный пользовательский сайт.
-</p>
-<p>
-    Это удобно, бесплатно и отлично подходит для личных блогов, документации или демонстрационных проектов!
-</p>
-
-<!-- Запись от 1 января 2026 -->
-<h2>1 января, 2026</h2>
-<div class="new-year-section">
-    <h2>С Новым годом 2026!</h2>
+<!-- === ЗАПИСЬ: 14 января 2026 === -->
+<div class="post-section">
+    <h2>14 января, 2026</h2>
     <p>
-        Под ёлкой светят огоньки,<br>
-        В окне мороз рисует сны.<br>
-        Звезда ведёт путей вершины —<br>
-        Новый год приходит к нам!
+        Сегодня я решила разобраться, из каких частей состоит доменное имя моего сайта и как устроена его иерархия. Поскольку мой блог размещён на GitHub Pages, его адрес выглядит так:
+        <code>https://&lt;имя-пользователя&gt;.github.io</code>.
     </p>
+    <p>
+        Возьмём конкретный пример: если мой аккаунт на GitHub называется <strong>alyapalagina</strong>, то полное доменное имя сайта будет:
+        <strong>alyapalagina.github.io</strong>.
+    </p>
+    <p>
+        Эта структура состоит из трёх уровней доменной иерархии (читается справа налево):
+    </p>
+    <ul>
+        <li><strong>.io</strong> — домен верхнего уровня (TLD, Top-Level Domain). Изначально он принадлежал Британской территории в Индийском океане, но сейчас широко используется в IT-сфере.</li>
+        <li><strong>github</strong> — домен второго уровня (SLD, Second-Level Domain). Он принадлежит компании GitHub и используется для предоставления поддоменов пользователям.</li>
+        <li><strong>alyapalagina</strong> — поддомен третьего уровня, созданный автоматически при публикации репозитория через GitHub Pages.</li>
+    </ul>
+    <p>
+        Таким образом, DNS-система читает доменное имя от глобального к локальному: сначала определяется зона <code>.io</code>, внутри неё — серверы <code>github.io</code>, а уже внутри них — конкретный пользовательский сайт.
+    </p>
+    <p>
+        Это удобно, бесплатно и отлично подходит для личных блогов, документации или демонстрационных проектов!
+    </p>
+</div>
 
-    <div class="video-container">
-        <img src="https://i.imgur.com/9WYx7Zb.jpg" alt="Нажмите, чтобы посмотреть видео" id="video-trigger">
-        <span class="video-caption">👉 Нажмите на картинку, чтобы открыть праздничное видео</span>
+<!-- === ЗАПИСЬ: 1 января 2026 === -->
+<div class="post-section">
+    <h2>1 января, 2026</h2>
+    <div class="new-year-section">
+        <h2>С Новым годом 2026!</h2>
+        <p>
+            Под ёлкой светят огоньки,<br>
+            В окне мороз рисует сны.<br>
+            Звезда ведёт путей вершины —<br>
+            Новый год приходит к нам!
+        </p>
+
+        <div class="video-container">
+            <img src="https://i.imgur.com/9WYx7Zb.jpg" alt="Нажмите, чтобы посмотреть видео" id="video-trigger">
+            <span class="video-caption">👉 Нажмите на картинку, чтобы открыть праздничное видео</span>
+        </div>
     </div>
 </div>
 
-<!-- Остальные записи -->
-<h2>1 декабря, 2025</h2>
-<img src="Icons/newyear2026.png" alt="Новый год" style="max-width:100px; margin:10px 0;">
-<p>Поздравление с Наступающим 2026 годом читайте <a href="Congratulations2026.html">здесь</a>.</p>
+<!-- === ОСТАЛЬНЫЕ ЗАПИСИ === -->
+<div class="post-section">
+    <h2>1 декабря, 2025</h2>
+    <img src="Icons/newyear2026.png" alt="Новый год" style="max-width:100px; margin:10px 0; filter: drop-shadow(0 0 8px gold);">
+    <p>Поздравление с Наступающим 2026 годом читайте <a href="Congratulations2026.html">здесь</a>.</p>
+</div>
 
-<h2>15 октября, 2025</h2>
-<p>
-    Я сделала Новогодние кроссворды — откройте их прямо здесь:  
-    <a href="crosswords.html" target="_blank" title="Новогодние кроссворды 🇷🇺🇬🇧">Сайт моего друга 🎁</a>.
-</p>
+<div class="post-section">
+    <h2>15 октября, 2025</h2>
+    <p>
+        Я сделала Новогодние кроссворды — откройте их прямо здесь:  
+        <a href="crosswords.html" target="_blank" title="Новогодние кроссворды 🇷🇺🇬🇧">Сайт моего друга 🎁</a>.
+    </p>
+</div>
 
-<h2>1 сентября, 2025</h2>
-<blockquote>Путешествие в тысячу миль начинается с одного шага (Лао Цзы)</blockquote>
-<p>
-    Оставляю в прошлом скучную неинтересную локальную файловую систему ради Всемирной паутины.
-</p>
+<div class="post-section">
+    <h2>1 сентября, 2025</h2>
+    <blockquote style="font-style:italic; color:#d32f2f; background:rgba(255,255,255,0.7); padding:12px; border-radius:12px;">
+        Путешествие в тысячу миль начинается с одного шага (Лао Цзы)
+    </blockquote>
+    <p>
+        Оставляю в прошлом скучную неинтересную локальную файловую систему ради Всемирной паутины.
+    </p>
+</div>
 
-<!-- Снежинки -->
+<!-- Эффекты -->
 <div class="snowflakes" id="snowflakes"></div>
-<!-- Сердечки -->
 <div class="hearts" id="hearts"></div>
-<!-- Canvas для салюта -->
 <canvas id="fireworkCanvas"></canvas>
 
 <footer>
@@ -315,39 +365,40 @@
 <script>
     // === СНЕЖИНКИ ===
     const snowflakesContainer = document.getElementById('snowflakes');
-    const snowflakeCount = 30;
-    const snowflakes = ['❄', '❅', '❆'];
+    const snowflakeCount = 40;
+    const snowflakes = ['❄', '❅', '❆', '❉'];
 
     for (let i = 0; i < snowflakeCount; i++) {
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
         snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
         snowflake.style.left = Math.random() * 100 + 'vw';
-        snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-        snowflake.style.fontSize = (Math.random() * 16 + 12) + 'px';
-        snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+        snowflake.style.fontSize = (Math.random() * 20 + 14) + 'px';
+        snowflake.style.animationDuration = (Math.random() * 6 + 4) + 's';
         snowflake.style.animationDelay = Math.random() * 5 + 's';
+        snowflake.style.color = ['#ffffff', '#ffeb3b', '#ffccbc'][Math.floor(Math.random() * 3)];
         snowflakesContainer.appendChild(snowflake);
     }
 
     // === СЕРДЕЧКИ ===
     const heartsContainer = document.getElementById('hearts');
-    const heartCount = 15;
-    const heartSymbols = ['❤', '💖', '💗', '💓', '💕'];
+    const heartCount = 20;
+    const heartSymbols = ['❤', '💖', '💗', '💓', '💕', '💘'];
 
     for (let i = 0; i < heartCount; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDelay = Math.random() * 5 + 's';
-        heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
-        heart.style.fontSize = (Math.random() * 16 + 14) + 'px';
-        heart.style.color = ['#ff6b6b', '#ff8e8e', '#ff4757', '#ff7373'][Math.floor(Math.random() * 4)];
+        heart.style.animationDelay = Math.random() * 6 + 's';
+        heart.style.animationDuration = (Math.random() * 5 + 7) + 's';
+        heart.style.fontSize = (Math.random() * 18 + 16) + 'px';
+        heart.style.color = ['#ff4081', '#e91e63', '#ff6b6b', '#ff9aa2', '#ffd166'][Math.floor(Math.random() * 5)];
         heartsContainer.appendChild(heart);
     }
 
-    // === САЛЮТ (CANVAS) ===
+    // === САЛЮТ ===
     const canvas = document.getElementById('fireworkCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -363,13 +414,13 @@
             this.x = x;
             this.y = y;
             this.color = color;
-            this.radius = Math.random() * 2 + 1;
+            this.radius = Math.random() * 2.5 + 0.8;
             this.velocity = {
-                x: (Math.random() - 0.5) * 8,
-                y: (Math.random() - 0.5) * 8
+                x: (Math.random() - 0.5) * 10,
+                y: (Math.random() - 0.5) * 10
             };
             this.alpha = 1;
-            this.decay = Math.random() * 0.03 + 0.015;
+            this.decay = Math.random() * 0.04 + 0.01;
         }
 
         draw() {
@@ -384,7 +435,7 @@
         }
 
         update() {
-            this.velocity.y += 0.1; // гравитация
+            this.velocity.y += 0.12;
             this.x += this.velocity.x;
             this.y += this.velocity.y;
             this.alpha -= this.decay;
@@ -394,18 +445,18 @@
     }
 
     const fireworks = [];
-    const colors = ['#ff5252', '#ff4081', '#e040fb', '#7c4dff', '#536dfe', '#448aff', '#18ffff', '#69f0ae', '#ffeb3b'];
+    const colors = ['#ff5252', '#ff4081', '#e040fb', '#7c4dff', '#536dfe', '#448aff', '#18ffff', '#69f0ae', '#ffeb3b', '#ffd700', '#ff9800'];
 
     function createFirework(x, y) {
         const color = colors[Math.floor(Math.random() * colors.length)];
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 150; i++) {
             fireworks.push(new Particle(x, y, color));
         }
     }
 
     function animateFireworks() {
         requestAnimationFrame(animateFireworks);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         for (let i = fireworks.length - 1; i >= 0; i--) {
@@ -417,19 +468,18 @@
 
     animateFireworks();
 
-    // Запуск 3 салютов при загрузке
     setTimeout(() => {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
             setTimeout(() => {
                 const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height / 2;
+                const y = Math.random() * canvas.height / 2.5;
                 createFirework(x, y);
-            }, i * 800);
+            }, i * 900);
         }
-    }, 500);
+    }, 600);
 
     // === ВИДЕО ===
-    document.getElementById('video-trigger').addEventListener('click', function() {
+    document.getElementById('video-trigger')?.addEventListener('click', function() {
         window.open('https://example.com/video.mp4', '_blank');
     });
 </script>
