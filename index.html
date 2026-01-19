@@ -13,34 +13,34 @@
             src: url('Pudelinka.ttf') format('truetype');
         }
 
-        /* ПРАЗДНИЧНЫЙ ФОН — ФИОЛЕТОВЫЙ → РОЗОВЫЙ → ГОЛУБОЙ */
+        /* НАСЫЩЕННЫЙ СИРЕНЕВЫЙ ФОН + РОЗОВЫЙ + ГОЛУБОЙ */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 40px;
-            background: linear-gradient(135deg, #8A2BE2, #FF69B4, #00BFFF);
+            background: linear-gradient(135deg, #6A0DAD, #9B59B6, #8E44AD);
             color: #2b2b2b;
             position: relative;
             overflow-x: hidden;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+            text-shadow: 0 1px 1px rgba(255,255,255,0.4);
         }
 
         /* Мерцающий контейнер записей */
         .post-section {
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             animation: glow 4s infinite alternate;
         }
 
         @keyframes glow {
-            from { box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+            from { box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
             to { 
-                box-shadow: 0 8px 35px rgba(138, 43, 226, 0.4), 
-                            0 0 20px rgba(255, 105, 180, 0.3); 
+                box-shadow: 0 8px 35px rgba(138, 43, 226, 0.5), 
+                            0 0 20px rgba(255, 105, 180, 0.4); 
             }
         }
 
@@ -65,13 +65,50 @@
             text-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
+        /* Звёздочки */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            top: -20px;
+            font-size: 1.3em;
+            opacity: 0;
+            animation: fallStar 7s infinite ease-in;
+            text-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+        @keyframes fallStar {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
         @keyframes fall {
             to {
                 transform: translateY(100vh) rotate(360deg);
             }
         }
 
-        /* Сердечки — в розово-фиолетовой гамме */
+        /* Сердечки */
         .hearts {
             position: fixed;
             top: 0;
@@ -115,8 +152,8 @@
             color: #fff;
             margin: 20px 0 40px;
             font-size: 1.2em;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            background: rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.25);
             padding: 15px;
             border-radius: 15px;
         }
@@ -132,8 +169,8 @@
             font-size: 1.3em;
             margin: 16px 0;
             font-family: 'Pudelinka', cursive;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         /* Новогодняя секция */
@@ -141,9 +178,9 @@
             text-align: center;
             margin: 40px 0;
             padding: 35px;
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 25px rgba(138,43,226,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 25px rgba(138,43,226,0.5);
             position: relative;
             overflow: hidden;
             border: 3px solid #DA70D6;
@@ -152,8 +189,8 @@
         .new-year-section h2 {
             font-family: 'Pudelinka', cursive;
             font-size: 2.8em;
-            color: #8A2BE2;
-            text-shadow: 2px 2px 6px rgba(255,105,180,0.8);
+            color: #6A0DAD;
+            text-shadow: 2px 2px 6px rgba(255,182,193,0.8);
             margin-bottom: 20px;
             letter-spacing: 1px;
         }
@@ -165,7 +202,7 @@
             color: #C71585;
             max-width: 700px;
             margin: 0 auto 25px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
 
         /* Видео */
@@ -180,14 +217,14 @@
         .video-container img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(138,43,226,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 0 20px rgba(138,43,226,0.4);
             transition: all 0.4s ease;
             border: 5px solid #DA70D6;
         }
 
         .video-container img:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(255,105,180,0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.55), 0 0 30px rgba(255,105,180,0.7);
             border-color: #FF69B4;
         }
 
@@ -202,13 +239,13 @@
 
         /* Заголовки записей */
         h2 {
-            color: #8A2BE2;
+            color: #6A0DAD;
             margin-top: 40px;
             font-family: 'Pudelinka', cursive;
             font-size: 2em;
             text-align: center;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.7);
-            background: rgba(255,255,255,0.6);
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.65);
             padding: 10px;
             border-radius: 15px;
             display: inline-block;
@@ -219,7 +256,7 @@
         p, a {
             font-size: 1.15em;
             color: #2b2b2b;
-            background-color: rgba(255,255,255,0.7);
+            background-color: rgba(255,255,255,0.75);
             padding: 8px 12px;
             border-radius: 10px;
             display: inline-block;
@@ -227,17 +264,17 @@
         }
 
         a {
-            color: #8A2BE2;
+            color: #6A0DAD;
             text-decoration: none;
             font-weight: bold;
-            background: rgba(230, 230, 250, 0.8);
+            background: rgba(230, 230, 250, 0.85);
             border: 1px solid #DA70D6;
         }
 
         a:hover {
             text-decoration: underline;
-            background: rgba(255,182,193,0.9);
-            color: #8A2BE2;
+            background: rgba(255,182,193,0.95);
+            color: #6A0DAD;
         }
 
         /* Footer */
@@ -245,9 +282,9 @@
             margin-top: 70px;
             text-align: center;
             font-size: 0.95em;
-            color: #fff;
+            color: #f0e6ff;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.25);
             padding: 12px;
             border-radius: 15px;
         }
@@ -257,7 +294,7 @@
             font-weight: bold;
         }
 
-        /* Canvas для салюта — цвета адаптированы */
+        /* Canvas для салюта */
         #fireworkCanvas {
             position: fixed;
             top: 0;
@@ -278,7 +315,7 @@
         }
 
         ul {
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.75);
             padding: 12px 20px;
             border-radius: 10px;
             margin: 10px 0;
@@ -294,7 +331,7 @@
 <!-- Ссылка на почту -->
 <p style="text-align: center; margin-bottom: 20px;">
     <a href="mailto:alya.palagina@bk.ru"
-       style="font-size: 1.3em; color: #8A2BE2; font-weight: bold; background: rgba(255,255,255,0.85); padding: 10px 20px; border-radius: 25px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+       style="font-size: 1.3em; color: #6A0DAD; font-weight: bold; background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 25px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
         📧 Напишите мне
     </a>
 </p>
@@ -339,7 +376,7 @@
     А=0, Б=1, ..., Я=31.</p>
 </div>
 
-<!-- === ЗАПИСЬ: 14 января 2026 === -->
+<!-- === ОСТАЛЬНЫЕ ЗАПИСИ === -->
 <div class="post-section">
     <h2>14 января, 2026</h2>
     <p>
@@ -366,7 +403,6 @@
     </p>
 </div>
 
-<!-- === ЗАПИСЬ: 1 января 2026 === -->
 <div class="post-section">
     <h2>1 января, 2026</h2>
     <div class="new-year-section">
@@ -385,7 +421,6 @@
     </div>
 </div>
 
-<!-- === ОСТАЛЬНЫЕ ЗАПИСИ === -->
 <div class="post-section">
     <h2>1 декабря, 2025</h2>
     <img src="Icons/newyear2026.png" alt="Новый год" style="max-width:100px; margin:10px 0; filter: drop-shadow(0 0 8px #DA70D6);">
@@ -402,7 +437,7 @@
 
 <div class="post-section">
     <h2>1 сентября, 2025</h2>
-    <blockquote style="font-style:italic; color:#8A2BE2; background:rgba(255,255,255,0.7); padding:12px; border-radius:12px;">
+    <blockquote style="font-style:italic; color:#6A0DAD; background:rgba(255,255,255,0.75); padding:12px; border-radius:12px;">
         Путешествие в тысячу миль начинается с одного шага (Лао Цзы)
     </blockquote>
     <p>
@@ -413,6 +448,7 @@
 <!-- Эффекты -->
 <div class="snowflakes" id="snowflakes"></div>
 <div class="hearts" id="hearts"></div>
+<div class="stars" id="stars"></div>
 <canvas id="fireworkCanvas"></canvas>
 
 <footer>
@@ -423,7 +459,7 @@
 <script>
     // === СНЕЖИНКИ ===
     const snowflakesContainer = document.getElementById('snowflakes');
-    const snowflakeCount = 40;
+    const snowflakeCount = 30;
     const snowflakes = ['❄', '❅', '❆', '❉'];
 
     for (let i = 0; i < snowflakeCount; i++) {
@@ -435,7 +471,7 @@
         snowflake.style.fontSize = (Math.random() * 20 + 14) + 'px';
         snowflake.style.animationDuration = (Math.random() * 6 + 4) + 's';
         snowflake.style.animationDelay = Math.random() * 5 + 's';
-        snowflake.style.color = ['#ffffff', '#DA70D6', '#87CEFA'][Math.floor(Math.random() * 3)];
+        snowflake.style.color = ['#ffffff', '#E6E6FA', '#D8BFD8'][Math.floor(Math.random() * 3)];
         snowflakesContainer.appendChild(snowflake);
     }
 
@@ -454,6 +490,23 @@
         heart.style.fontSize = (Math.random() * 18 + 16) + 'px';
         heart.style.color = ['#FF69B4', '#DA70D6', '#BA55D3', '#87CEFA', '#4B0082'][Math.floor(Math.random() * 5)];
         heartsContainer.appendChild(heart);
+    }
+
+    // === ЗВЁЗДОЧКИ ===
+    const starsContainer = document.getElementById('stars');
+    const starCount = 25;
+    const starSymbols = ['★', '☆', '✦', '✧', '⭐'];
+
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDelay = Math.random() * 6 + 's';
+        star.style.animationDuration = (Math.random() * 6 + 8) + 's';
+        star.style.fontSize = (Math.random() * 16 + 12) + 'px';
+        star.style.color = ['#FFB6C1', '#DDA0DD', '#BA55D3', '#87CEFA', '#E0FFFF'][Math.floor(Math.random() * 5)];
+        starsContainer.appendChild(star);
     }
 
     // === САЛЮТ ===
@@ -503,8 +556,7 @@
     }
 
     const fireworks = [];
-    // Цвета салюта: фиолетовый, розовый, голубой, индиго
-    const colors = ['#8A2BE2', '#DA70D6', '#FF69B4', '#BA55D3', '#9400D3', '#4B0082', '#87CEFA', '#00BFFF', '#1E90FF', '#4682B4'];
+    const colors = ['#8A2BE2', '#DA70D6', '#FF69B4', '#BA55D3', '#9400D3', '#4B0082', '#87CEFA', '#00BFFF', '#1E90FF', '#4682B4', '#FFB6C1'];
 
     function createFirework(x, y) {
         const color = colors[Math.floor(Math.random() * colors.length)];
@@ -515,7 +567,7 @@
 
     function animateFireworks() {
         requestAnimationFrame(animateFireworks);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+        ctx.fillStyle = 'rgba(106, 13, 173, 0.08)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         for (let i = fireworks.length - 1; i >= 0; i--) {
